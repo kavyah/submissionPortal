@@ -1,0 +1,45 @@
+<h1>Submit Assignments</h1>
+
+<div class="row show-hide-message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+
+
+
+
+
+<form [formGroup]="form" name="submissionForm" (submit)="onSubmit()">
+
+
+  <div class="form-group">
+    <label for="link">Link</label>
+    <div [ngClass]="{'has-success': form.controls.link.valid, 'has-error': form.controls.link.dirty && form.controls.link.errors}">
+      <input type="text" name="link" class="form-control" placeholder="*Link to your Files" autocomplete="off" formControlName="link" />
+      <ul class="help-block">
+        <li *ngIf="form.controls.link.dirty && form.controls.link.errors?.required">This field is required.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="references">References</label>
+    <div>
+      <textarea name="references" rows="8" cols="80" class="form-control" formControlName="references"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="comments">Comments</label>
+    <div>
+      <textarea name="comments" rows="8" cols="80" class="form-control" formControlName="comments"></textarea>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <button [disabled]="!form.valid" type="submit" name="button" class="btn btn-success">Submit</button>
+
+</form>
+

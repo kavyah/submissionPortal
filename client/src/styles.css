@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+
+}
+
+.btn{
+  height:50px;
+  width: 300px;
+  text-align:center;
+  color:white;
+  background-color:black;
+}

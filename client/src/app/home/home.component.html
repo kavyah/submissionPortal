@@ -1,0 +1,18 @@
+
+
+<div class="text-center">
+  <h1>Submission Portal</h1>
+  <img src="https://www.hamline.edu/uploadedImages/Hamline_WWW/Offices_-_Admin/Copy_Center(1)/Images/Collaborative-Projects-and-Assignments-Word-Cloud.gif?n=3325"  width="660" height="545">
+
+  </div>
+    <div class="text-center">
+      <div class="column">
+        <a *ngIf="!authService.loggedIn()" routerLink="/register" class="btn btn-primary test">Register</a>
+      </div>
+     <div class="column">
+    <a *ngIf="!authService.loggedIn()" routerLink="/login" class="btn btn-default test">Login</a>
+  </div>
+      <div class="column">
+        <a *ngIf="authService.loggedIn()" routerLink="/submission" class="btn btn-default test">Submission</a>
+      </div>
+      </div>
