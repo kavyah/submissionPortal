@@ -107,7 +107,7 @@ module.exports = (router) => {
         }
     });
     
-    router.use((req, res, next) => {
+   router.use((req, res, next) => {
         const token = req.headers['authorization']; // Create token found in headers
         // Check if token was found in headers
         if (!token) {

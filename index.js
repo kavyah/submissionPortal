@@ -8,7 +8,7 @@ const authentication = require('./routes/authentication')(router);
 const submit = require('./routes/submit')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT||8080;
 // Database Connection
 mongoose.Promise = global.Promise;
 mongoose.connect(config.uri,(err) => {
