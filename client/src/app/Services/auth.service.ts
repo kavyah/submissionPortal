@@ -6,7 +6,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
 
-    domain = "http://localhost:8080/"; // Development Domain - Not Needed in Production
+    domain = " "; 
     authToken;
     user;
     options;
@@ -15,31 +15,30 @@ export class AuthService {
         private http: Http
     ) { }
 
-    // Function to create headers, add token, to be used in HTTP requests
+    
     createAuthenticationHeaders() {
-        this.loadToken(); // Get token so it can be attached to headers
-        // Headers configuration options
+        this.loadToken(); 
         this.options = new RequestOptions({
             headers: new Headers({
-                'Content-Type': 'application/json', // Format set to JSON
-                'authorization': this.authToken // Attach token
+                'Content-Type': 'application/json',
+                'authorization': this.authToken 
             })
         });
     }
 
-    // Function to get token from client local storage
+    
     loadToken() {
-        this.authToken = localStorage.getItem('token');; // Get token and asssign to variable to be used elsewhere
+        this.authToken = localStorage.getItem('token');
     }
 
-    // Function to register user accounts
+    
     registerUser(user) {
         return this.http.post(this.domain + 'authentication/register', user).map(res => res.json());
     }
 
     
 
-    // Function to check if e-mail is taken
+    
     checkEmail(email) {
         return this.http.get(this.domain + 'authentication/checkEmail/' + email).map(res => res.json());
     }
