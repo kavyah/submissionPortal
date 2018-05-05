@@ -14,25 +14,25 @@ export class SubmissionService {
         private http: Http
     ) { }
 
-    // Function to create headers, add token, to be used in HTTP requests
+    
     createAuthenticationHeaders() {
-        this.authService.loadToken(); // Get token so it can be attached to headers
-        // Headers configuration options
+        this.authService.loadToken(); 
+    
         this.options = new RequestOptions({
             headers: new Headers({
-                'Content-Type': 'application/json', // Format set to JSON
-                'authorization': this.authService.authToken // Attach token
+                'Content-Type': 'application/json', 
+                'authorization': this.authService.authToken 
             })
         });
     }
 
     newSubmission(submission) {
-        this.createAuthenticationHeaders(); // Create headers
+        this.createAuthenticationHeaders(); 
         return this.http.post(this.domain + 'submit/submission', submission, this.options).map(res => res.json());
     }
 
     getAllSubmissions() {
-        this.createAuthenticationHeaders(); // Create headers
+        this.createAuthenticationHeaders();
         return this.http.get(this.domain + 'submit/allSubmissions', this.options).map(res => res.json());
     }
 

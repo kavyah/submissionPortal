@@ -21,55 +21,50 @@ export class LoginComponent implements OnInit {
         private authService: AuthService,
         private router: Router
     ) {
-        this.createForm(); // Create Login Form when component is constructed
+        this.createForm();
     }
 
-    // Function to create login form
-    createForm() {
+     createForm() {
         this.form = this.formBuilder.group({
-            email: ['', Validators.required], // Username field
-            password: ['', Validators.required] // Password field
-        });
+            email: ['', Validators.required], 
+            password: ['', Validators.required]        });
     }
 
-    // Function to disable form
+    
     disableForm() {
-        this.form.controls['email'].disable(); // Disable username field
-        this.form.controls['password'].disable(); // Disable password field
+        this.form.controls['email'].disable(); 
+        this.form.controls['password'].disable(); 
     }
 
-    // Function to enable form
+    
     enableForm() {
-        this.form.controls['email'].enable(); // Enable username field
-        this.form.controls['password'].enable(); // Enable password field
+        this.form.controls['email'].enable();
+        this.form.controls['password'].enable();
     }
 
-    // Functiont to submit form and login user
+    
     onLoginSubmit() {
-        this.processing = true; // Used to submit button while is being processed
-        this.disableForm(); // Disable form while being process
-        // Create user object from user's input
+        this.processing = true; 
+        this.disableForm(); 
         const user = {
-            email: this.form.get('email').value, // Username input field
-            password: this.form.get('password').value // Password input field
+            email: this.form.get('email').value,
+            password: this.form.get('password').value 
         }
 
-        // Function to send login data to API
+        
         this.authService.login(user).subscribe(data => {
-            // Check if response was a success or error
             if (!data.success) {
-                this.messageClass = 'alert alert-danger'; // Set bootstrap error class
-                this.message = data.message; // Set error message
-                this.processing = false; // Enable submit button
-                this.enableForm(); // Enable form for editting
+                this.messageClass = 'alert alert-danger';
+                this.message = data.message; 
+                this.processing = false; 
+                this.enableForm(); 
             } else {
-                this.messageClass = 'alert alert-success'; // Set bootstrap success class
-                this.message = data.message; // Set success message
-                // Function to store user's token in client local storage
+                this.messageClass = 'alert alert-success';
+                this.message = data.message;
                 this.authService.storeUserData(data.token, data.user);
-                // After 2 seconds, redirect to dashboard page
+              
                 setTimeout(() => {
-                    this.router.navigate(['/submission']); // Navigate to dashboard view
+                    this.router.navigate(['/submission']);
                 }, 2000);
             }
         });

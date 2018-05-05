@@ -1,6 +1,6 @@
-const User = require('../models/user'); // Import User Model Schema
-const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
-const config = require('../config/database'); // Import database configuration
+const User = require('../models/user'); 
+const jwt = require('jsonwebtoken'); 
+const config = require('../config/database');
 
 module.exports = (router) => {
 
@@ -74,27 +74,23 @@ module.exports = (router) => {
         }
     });
     router.post('/login', (req, res) => {
-        // Check if username was provided
+        
         if (!req.body.email) {
             res.json({ success: false, message: 'No email was provided' }); // Return error
         } else {
-            // Check if password was provided
-            if (!req.body.password) {
+                   if (!req.body.password) {
                 res.json({ success: false, message: 'No password was provided.' }); // Return error
             } else {
-                // Check if username exists in database
-                User.findOne({ email: req.body.email.toLowerCase() }, (err, user) => {
+                        User.findOne({ email: req.body.email.toLowerCase() }, (err, user) => {
                     // Check if error was found
                     if (err) {
                         res.json({ success: false, message: err }); // Return error
                     } else {
-                        // Check if username was found
-                        if (!user) {
+                              if (!user) {
                             res.json({ success: false, message: 'Email not found.' }); // Return error
                         } else {
                             const validPassword = user.comparePassword(req.body.password); // Compare password provided to password in database
-                            // Check if password is a match
-                            if (!validPassword) {
+                                 if (!validPassword) {
                                 res.json({ success: false, message: 'Password invalid' }); // Return error
                             } else {
                                 const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for client
@@ -133,7 +129,6 @@ module.exports = (router) => {
             if (err) {
                 res.json({ success: false, message: err }); // Return error
             } else {
-                // Check if user was found in database
                 if (!user) {
                     res.json({ success: false, message: 'User not found' }); // Return error, user was not found in db
                 } else {

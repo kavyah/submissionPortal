@@ -1,0 +1,23 @@
+<div class="panel panel-primary" *ngFor="let submissions of submissions">
+
+  <div class="panel-body">
+    <strong>Student Email: </strong>{{ submissions.email }}
+  </div>
+  <div class="panel-body">
+    <strong>Link: </strong> {{ submissions.link }}
+  </div>
+  <div class="panel-body">
+    <strong>References: </strong> {{ submissions.references }}
+  </div>
+  
+  <div class="panel-body">
+    <strong>Comments: </strong> {{ submissions.comments }}
+  </div>
+
+  <!-- Panel Footer Start -->
+  <div class="panel-footer">
+    <strong>Created by: </strong>{{ submissions.createdBy }}
+    <br />
+    <strong>Date: </strong>{{ submissions.createdAt | date:'MMM dd, yyyy' }}
+  </div>
+</div>

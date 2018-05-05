@@ -16,6 +16,8 @@ export class SubmissionComponent implements OnInit {
     message;
     email;
     form;
+    linkValid;
+    linkMessage;
     submissions;
     constructor(private formBuilder: FormBuilder,
         public authService: AuthService, private submissionService: SubmissionService
@@ -28,7 +30,8 @@ export class SubmissionComponent implements OnInit {
         this.form = this.formBuilder.group({
             link: ['', Validators.compose([
                 Validators.required
-                       ])],
+                //this.validateLink
+            ])],
             references: [''],
             comments: [''],
         })
@@ -36,39 +39,53 @@ export class SubmissionComponent implements OnInit {
     
      onSubmit() {
          const submission = {
-            link: this.form.get('link').value, // Title field
-             references: this.form.get('references').value, // Body field
-             comments: this.form.get('comments').value, // Body field
+            link: this.form.get('link').value, 
+            references: this.form.get('references').value,
+            comments: this.form.get('comments').value, 
              createdBy: this.email 
 
          }
          this.submissionService.newSubmission(submission).subscribe(data => {
 
              if (!data.success) {
-                 this.messageClass = 'alert alert-danger'; // Return error class
-                 this.message = data.message; // Return error message
-                 this.getAllSubmissions();                 
+                 this.messageClass = 'alert alert-danger'; 
+                 this.message = data.message;                 
              } else {
-                 this.messageClass = 'alert alert-success'; // Return success class
-                 this.message = data.message; // Return success message
-                 // Clear form data after two seconds
-                 setTimeout(() => {
-                     this.form.reset(); // Reset all form fields
+                 this.messageClass = 'alert alert-success'; 
+                 this.message = data.message; 
+
+                  setTimeout(() => {
+                     this.form.reset(); 
                  }, 2000);
              }
          }); 
      } 
 
-     getAllSubmissions() {
-        
-         this.submissionService.getAllSubmissions().subscribe(data => {
-             this.submissions = data.submissions; // Assign array to use in HTML
+     
+    /* validateLink(controls) {
+         // Create a regular expression
+         const regExp = new RegExp('/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/');
+         // Test email against regular expression
+         if (regExp.test(controls.value)) {
+             return null; // Return as valid email
+         } else {
+             return { 'validateLink': true } // Return as invalid email
+         }
+     }*/
+     checkLink() {
+         
+         this.authService.checkLink(this.form.get('link').value).subscribe(data => {
+                      if (!data.success) {
+                 this.linkValid = false;
+                 this.linkMessage = data.message; 
+             } else {
+                          this.linkValid = true;
+                          this.linkMessage = data.message;
+             }
          });
      }
-  
 
     ngOnInit() {
-        
         this.authService.getProfile().subscribe(profile => {
             this.email = profile.user.email; 
         });

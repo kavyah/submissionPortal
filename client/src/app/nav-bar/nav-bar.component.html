@@ -8,6 +8,7 @@
     <ul class="nav navbar-nav navbar-left">
       <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="">Home</a></li>
       <li  *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/submission">Submission</a></li>
+      <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/viewSubmission">View Submission</a></li>
       <li><a *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Logout</a></li>
           </ul>
   </div>

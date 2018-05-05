@@ -42,7 +42,7 @@ module.exports = (router) => {
     });
 
     router.get('/allSubmissions', (req, res) => {
-        // Search database for all blog posts
+        
         Submission.find({}, (err, submission) => {
             // Check if error was found or not
             if (err) {
@@ -50,12 +50,12 @@ module.exports = (router) => {
             } else {
                 // Check if blogs were found in database
                 if (!submission) {
-                    res.json({ success: false, message: 'No submissions found.' }); // Return error of no blogs found
+                    res.json({ success: false, message: 'No submissions found.' });
                 } else {
-                    res.json({ success: true, submissions:submission  }); // Return success and blogs array
+                    res.json({ success: true, submissions:submission  }); 
                 }
             }
-        }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
+        }).sort({ '_id': -1 }); 
     });
 
     return router;

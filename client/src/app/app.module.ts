@@ -14,10 +14,11 @@ import { SubmissionService } from './Services/submission.service';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { VeiwSubmissionComponent } from './veiw-submission/veiw-submission.component';
 
 
 @NgModule({
-    declarations: [AppComponent, NavBarComponent, HomeComponent, SubmissionComponent, RegisterComponent, LoginComponent, ProfileComponent
+    declarations: [AppComponent, NavBarComponent, HomeComponent, SubmissionComponent, RegisterComponent, LoginComponent, ProfileComponent, VeiwSubmissionComponent
   ],
   imports: [
       BrowserModule,

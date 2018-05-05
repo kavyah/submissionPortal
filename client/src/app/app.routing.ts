@@ -8,7 +8,7 @@ import { SubmissionService } from './Services/submission.service';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
-
+import { VeiwSubmissionComponent } from './veiw-submission/veiw-submission.component';
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     {
@@ -18,7 +18,10 @@ const appRoutes: Routes = [
     },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'profile', component: ProfileComponent }
+    { path: 'profile', component: ProfileComponent },
+    {
+        path: 'viewSubmission', component: VeiwSubmissionComponent, canActivate:[AuthGuard]
+    },
     //{ path: '**', component: PageNotFoundComponent }
 ];
 

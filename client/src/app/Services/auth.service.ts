@@ -6,7 +6,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
 
-    domain = ""; // Development Domain - Not Needed in Production
+    domain = "http://localhost:8080/"; // Development Domain - Not Needed in Production
     authToken;
     user;
     options;
@@ -43,6 +43,10 @@ export class AuthService {
     checkEmail(email) {
         return this.http.get(this.domain + 'authentication/checkEmail/' + email).map(res => res.json());
     }
+    checkLink(link) {
+        return this.http.get(this.domain + 'authentication/checkLink/' + link).map(res => res.json());
+    }
+
 
     // Function to login user
     login(user) {
