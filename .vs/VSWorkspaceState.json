@@ -4,13 +4,14 @@
     "\\client",
     "\\client\\src",
     "\\client\\src\\app",
-    "\\client\\src\\app\\directives",
+    "\\client\\src\\app\\guards",
+    "\\client\\src\\app\\home",
     "\\client\\src\\app\\login",
     "\\client\\src\\app\\submission",
     "\\config",
     "\\models",
     "\\routes"
   ],
-  "SelectedNode": "\\client\\src\\app\\submission\\submission.component.ts",
+  "SelectedNode": "\\client\\src\\app\\app.routing.ts",
   "PreviewInSolutionExplorer": false
 }
